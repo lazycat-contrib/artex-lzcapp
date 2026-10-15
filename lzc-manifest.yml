@@ -28,7 +28,7 @@ services:
 
   artex:
     # upstream: tomicdd/artex:latest (docker.io)
-    image: docker.1ms.run/tomicdd/artex:latest
+    image: docker.1ms.run/tomicdd/artex:latest@sha256:cb85a7206290dc1813e3203e044741054b26c7a7c557c7d9d6d91af20aeb232b
     depends_on:
       - postgres
     environment:

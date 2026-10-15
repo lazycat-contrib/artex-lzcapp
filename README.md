@@ -5,7 +5,7 @@
 ## 模式
 
 - **镜像模式（mirror）**：`docker.io/tomicdd/artex` 镜像经 `docker.1ms.run` 加速器拉取，`require_digest_match: true` 校验镜像内容与上游一致。
-- **自动跟随上游**：上游仅发布 `latest` 可变 tag（amd64），采用 digest 比对 + `bump: patch` 模式——镜像内容变化时自动 patch +1 并发布。
+- **自动跟随上游**：上游仅发布 `latest` 可变 tag（amd64），采用 digest 比对 + `bump: patch` 模式——manifest 固定 `latest@sha256:...` 基线，镜像内容变化时自动 patch +1、更新 pin 并发布。
 - **喵喵商店发布**：仅私有商店（MiaoMiao private store），不发布官方商店。
 
 ## 配置
