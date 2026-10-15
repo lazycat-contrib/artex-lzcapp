@@ -1,0 +1,52 @@
+application:
+  subdomain: artex
+  background_task: true
+  multi_instance: false
+  public_path:
+    - /
+  upstreams:
+    - location: /
+      backend: http://artex:8787/
+
+services:
+  postgres:
+    # upstream: postgres:16-alpine (docker.io)
+    image: docker.1ms.run/postgres:16-alpine
+    environment:
+      - POSTGRES_USER=artex
+      - POSTGRES_PASSWORD={{ stable_secret "pg_password" }}
+      - POSTGRES_DB=artex
+    binds:
+      - /lzcapp/var/artex/pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -U artex -d artex
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  artex:
+    # upstream: tomicdd/artex:latest (docker.io)
+    image: docker.1ms.run/tomicdd/artex:latest
+    depends_on:
+      - postgres
+    environment:
+      - ARTEX_PG_DSN=postgres://artex:{{ stable_secret "pg_password" }}@postgres:5432/artex?sslmode=disable
+      # LLM 配置可留空，首次进入 /setup 或在「LLM 配置」页填写
+      - ANTHROPIC_API_KEY={{ .U.anthropic_api_key }}
+      - OPENAI_API_KEY={{ .U.openai_api_key }}
+      - ARTEX_LLM_PROVIDER={{ .U.llm_provider }}
+      - ARTEX_LLM_MODEL={{ .U.llm_model }}
+      - ARTEX_LLM_BASE_URL={{ .U.llm_base_url }}
+    binds:
+      - /lzcapp/var/artex/data:/app/data
+      - /lzcapp/var/artex/skills:/app/skills
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - wget -q --spider http://127.0.0.1:8787/ || exit 1
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s

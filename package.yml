@@ -1,0 +1,15 @@
+package: community.lazycat.app.artex
+version: 0.1.0
+name: ARTEXX
+description: "AI 自主渗透测试系统（攻防挑战赛冠军项目）"
+min_os_version: 1.5.0
+author: trhhubsd
+license: AGPL-3.0
+homepage: https://github.com/trhhubsd/ARTEXX
+locales:
+  zh:
+    name: "ARTEXX"
+    description: "AI 自主渗透测试系统：资产同步、自动化探索、LLM 驱动决策、流量录制代理与报告生成"
+  en:
+    name: "ARTEXX"
+    description: "AI autonomous penetration testing system with asset sync, automated exploration and LLM-driven decisions"

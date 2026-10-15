@@ -1,0 +1,53 @@
+params:
+  - id: anthropic_api_key
+    type: secret
+    name: "Anthropic API Key"
+    description: "Optional. Anthropic API key for the LLM (can also be set in the LLM settings page later)"
+    default_value: ""
+    optional: true
+
+  - id: openai_api_key
+    type: secret
+    name: "OpenAI API Key"
+    description: "Optional. OpenAI API key for the LLM (can also be set in the LLM settings page later)"
+    default_value: ""
+    optional: true
+
+  - id: llm_provider
+    type: string
+    name: "LLM Provider"
+    description: "Optional. LLM provider, e.g. anthropic / openai"
+    default_value: ""
+    optional: true
+
+  - id: llm_model
+    type: string
+    name: "LLM Model"
+    description: "Optional. LLM model ID, e.g. claude-sonnet-4-5"
+    default_value: ""
+    optional: true
+
+  - id: llm_base_url
+    type: string
+    name: "LLM Base URL"
+    description: "Optional. Custom LLM endpoint for OpenAI-compatible services"
+    default_value: ""
+    optional: true
+
+locales:
+  zh:
+    anthropic_api_key:
+      name: "Anthropic API Key"
+      description: "可选。Anthropic 的 LLM API Key（也可之后在「LLM 配置」页填写）"
+    openai_api_key:
+      name: "OpenAI API Key"
+      description: "可选。OpenAI 的 LLM API Key（也可之后在「LLM 配置」页填写）"
+    llm_provider:
+      name: "LLM 服务商"
+      description: "可选。LLM 服务商，如 anthropic / openai"
+    llm_model:
+      name: "LLM 模型"
+      description: "可选。模型 ID，如 claude-sonnet-4-5"
+    llm_base_url:
+      name: "LLM Base URL"
+      description: "可选。自定义 OpenAI 兼容端点"
